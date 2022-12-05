@@ -179,7 +179,84 @@ Following is the list of relation schemas reduced from the ER-Diagram.
     R = genre(name, description)
 \end{equation*}
 \begin{equation*}
-    F = \{name \rightarrow description, description \rightarrow name\}
+    F = \{name \rightarrow description\}
 \end{equation*}
+Calculate $(name)^+$
+\begin{align*}
+    & result = name\\
+    & name \rightarrow description : result = name, description\\
+    & (name)^+ = name, description\\
+    & (name)^+ = R
+\end{align*}
+Genre is in BCNF.
 
+\subsubsection{Author}
+\begin{equation*}
+    R = author(ID, bio, nationality, DOB, fname, lname)
+\end{equation*}
+\begin{align*}
+    F = \{ & ID \rightarrow bio\\
+          & ID \rightarrow nationality\\
+          & ID \rightarrow DOB\\
+          & ID \rightarrow fname, lname \}
+\end{align*}
+Calculate if $ID$ is a superkey of $R$
+\begin{align*}
+    & (ID)^+\\
+    & result = ID\\
+    & ID \rightarrow bio : result = ID, bio\\
+    & ID \rightarrow nationality : result = ID, bio, nationality\\
+    & ID \rightarrow DOB : result = ID, bio, nationality, DOB\\
+    & ID \rightarrow fname, lname : result = ID, bio, nationality, DOB, fname, lname\\
+    & (ID)^+ = ID, bio, nationality, DOB, fname, lname
+\end{align*}
+Therefore $ID$ is superkey of $author$ and the relational schema is in BCNF.
+
+\subsubsection{Book}
+\begin{multline*}
+    R = book(prefix, group, ISBN, summary, title, n\_pages,\\
+    price, release\_date, in\_stock, p\_email, publisher\_percentage)
+\end{multline*}
+\begin{align*}
+    F = \{ & ISBN \rightarrow summary\\
+          & ISBN \rightarrow title\\
+          & ISBN \rightarrow n\_pages\\
+          & ISBN \rightarrow price\\
+          & ISBN \rightarrow release\_date\\
+          & ISBN \rightarrow in\_stock\\
+          & publisher \rightarrow p\_email\\
+          & ISBN \rightarrow publisher\_precentage\}
+\end{align*}
+
+Calculate if $ISBN$ is superkey of $R$
+\begin{align*}
+    & (ISBN)^+\\
+    & result = ISBN\\
+    & ISBN \rightarrow summary : result = ISBN, summary\\
+    & ISBN \rightarrow title : result = ISBN, summary, title\\
+    & ISBN \rightarrow n\_pages : result = ISBN, summary, title, n\_pages\\
+    & ISBN \rightarrow price : result = ISBN, summary, title, n\_pages, price\\
+    & ISBN \rightarrow release\_date : result = ISBN, summary, title, n\_pages\\
+    & price, release\_date\\
+    & ISBN \rightarrow in\_stock : result = ISBN, summary, title, n\_pages\\
+    & prices, release\_date, in\_stock\\
+    & ISBN \rightarrow p\_email : result = ISBN, summary, title, n\_pages\\
+    & prices, release\_date, in\_stock, p\_email\\
+    & ISBN \rightarrow publisher\_precentage\ : result = ISBN, summary, title\\
+    & n\_pages, prices, release\_date, in\_stock, p\_email, publisher\_percentage\\
+    & (ISBN)^+ = ISBN, summary, title, n\_pages, prices, release\_date,\\
+    & in\_stock, p\_email, publisher\_percentage\\
+\end{align*}
+Therefore $ISBN$ is superkey of $Book$ and the relational schema is in BCNF.
+
+\subsubsection{Publisher}
+\begin{equation*}
+    R = publisher(e\-mail, address, phone\_number, banking\_account, name)
+\end{equation*}
+\begin{align*}
+    F = \{ & e\-mail \rightarrow address\\
+           & e\-mail \rightarrow phone\_number\\
+           & e\-mail \rightarrow banking\_account\\
+           & e\-mail \rightarrow name\}
+\end{align*}
 \end{document}

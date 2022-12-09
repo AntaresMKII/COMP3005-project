@@ -120,6 +120,7 @@ from the sale of the specified book.
     \caption{Publish relationship ER-diagram}\label{fig:erpu}
 \end{figure}
 
+\newpage
 \subsection{Ship To}
 The Ship To relationship is a 1:1 relationship which requires total participation
 from the Shipping Info weak entity, since it's its defining relationship,
@@ -171,6 +172,7 @@ Following is the list of relation schemas reduced from the ER-Diagram.
     \label{fig:rs}
 \end{figure}
 
+\newpage
 \section{Normalization of Relation Schemas}
 \subsection{Normal Form Test}
 \subsubsection{Genre}
@@ -211,6 +213,7 @@ Calculate if $ID$ is a superkey of $R$
 \end{align*}
 Therefore $ID$ is superkey of $author$ and the relational schema is in BCNF.
 
+\newpage
 \subsubsection{Book}
 \begin{multline*}
     R = book(prefix, group, ISBN, summary, title, n\_pages,\\
@@ -248,6 +251,7 @@ Calculate if $ISBN$ is superkey of $R$
 \end{align*}
 Therefore $ISBN$ is superkey of $Book$ and the relational schema is in BCNF.
 
+\newpage
 \subsubsection{Publisher}
 \begin{equation*}
     R = publisher(e\-mail, address, phone\_number, banking\_account, name)
@@ -258,6 +262,154 @@ Therefore $ISBN$ is superkey of $Book$ and the relational schema is in BCNF.
            & e\-mail \rightarrow banking\_account\\
            & e\-mail \rightarrow name\}
 \end{align*}
+
+Find if $email$ is superkey of $R$:
+\begin{align*}
+    & (email)^+\\
+    & result = email\\
+    & e\-mail \rightarrow address : result = email, address\\
+    & e\-mail \rightarrow phone\_number : result = email, address, phone\_number\\
+    & e\-mail \rightarrow banking\_account : result = email, address\\
+    & phone\_number, banking\_account\\
+    & e\-mail \rightarrow name : result = email, address, phone\_number\\
+    & banking\_account, name\\
+    & (email)^+ = email, address, phone\_number, banking\_account, name\\
+\end{align*}
+
+Since $email$ is superkey of $R$ no relation causes a violation of BCNF,
+therefore Publisher is in normal form.
+
+\subsubsection{User}
+\begin{equation*}
+    R = user{email, lname, fname, password}
+\end{equation*}
+\begin{align*}
+    F = \{ & emali \rightarrow lname\\
+           & email \rightarrow fname\\
+           & email \rightarrow password\}
+\end{align*}
+
+Normal form test of $R$ by finding if $email$ is superkey.
+\begin{align*}
+    & (email)^+\\
+    & result = email\\
+    & emali \rightarrow lname : result = email, lname\\
+    & emali \rightarrow fname : result = email, lname, fname\\
+    & emali \rightarrow password : result = email, lname, fname, password\\
+    & (email)^+ = email, lanme, fname, password\\
+    & (email)^+ = R
+\end{align*}
+$email$ is superkey of $R$, therefore no functional dependency in $F$ is in
+violation of BCNF and user is in normal form.
+
+\subsubsection{Checkout Basket}
+\begin{equation*}
+    R = checkout_basket(email)
+\end{equation*}
+\begin{equation*}
+    F = \{email \rightarrow email\}
+\end{equation*}
+
+The functional dependency $email \rightarrow email$ is trivial and the only
+functional relation. Therefore checkout basket is in normal form.
+
+\subsubsection{Order}
+\begin{equation*}
+    R = order(order\_number, date, email)
+\end{equation*}
+\begin{equation*}
+    F = \{ order\_number \rightarrow date, email \}
+\end{equation*}
+
+Normal form test for $R$ by finding if $order\_number$ is superkey.
+\begin{align*}
+    & (order\_numner)^+\\
+    & result = order\_number\\
+    & order\_number \rightarrow date, email : result = order\_number, date, email\\
+    & (order\_number)^+ = order\_number, date, email\\
+    & (order\_number)^+ = R
+\end{align*}
+
+Since $order\_number$ superkey of $R$ and no functional dependency is in violation
+of BCNF, then order is in normal form.
+
+\subsubsection{Tracking Info}
+\begin{equation*}
+    R = tracking\_info(order\_number, curier, status, expected\_delivery\_date)
+\end{equation*}
+\begin{align*}
+    F = \{ & oredr\_number \rightarrow curier\\
+           & order\_number \rightarrow status\\
+           & order\_number \rightarrow expected\_delivery\_date \}
+\end{align*}
+
+Normal form test for $R$ by finding if $order\_number$ is superkey.
+\begin{align*}
+    & (order\_number)^+\\
+    & result = order\_number\\
+    & oredr\_number \rightarrow curier : result = order\_number, curier\\
+    & oredr\_number \rightarrow status : result = order\_number, curier, status\\
+    & oredr\_number \rightarrow expected\_delivery\_date : result = order\_number\\
+    & curier, status, expected\_delivery\_date\\
+    & (order\_number)^+ = order\_number, curier, status, expected\_delivery\_date\\
+    & (order\_number)^+ = R
+\end{align*}
+
+Since $order\_number$ superkey of $R$ and no functional dependency is in violation
+of BCNF, then tracking info is in normal form.
+
+\subsubsection{Billing Info}
+\begin{equation*}
+    R = billing\_info(order\_number, address, fname, lname, card\_number, exp\_date)
+\end{equation*}
+\begin{align*}
+    F = \{ & order\_number \rightarrow address\\
+           & order\_number \rightarrow fname, lname\\
+           & order\_number \rightarrow card\_number\\
+           & order\_number \rightarrow exp\_date \}
+\end{align*}
+
+Normal form test for $R$ by finding if $order\_number$ is superkey.
+\begin{align*}
+    & (order\_number)^+\\
+    & result = order\_number\\
+    & order\_number \rightarrow address : result = order\_number, address\\
+    & order\_number \rightarrow fname, lname : result = order\_number, address,\\
+    & fname, lname\\
+    & order\_number \rightarrow card\_number : result = order\_number, address,\\
+    & fname, lname, card\_number\\
+    & order\_number \rightarrow exp\_date : result = order\_number, address,\\
+    & fname, lname, card\_number, exp\_date\\
+    & (order\_number)^+ = order\_number, address, fname, lname, card\_number,\\
+    & exp\_date\\
+    & (order\_number)^+ = R
+\end{align*}
+
+Since $order\_number$ superkey of $R$ and no functional dependency is in violation
+of BCNF, then billing info is in normal form.
+
+\subsubsection{Shipping Info}
+\begin{equation*}
+    R = shipping\_info(order\_number, address, fname, lname)
+\end{equation*}
+\begin{align*}
+    F = \{ & order\_number \rightarrow address\\
+           & order\_number \rightarrow fname, lname \}
+\end{align*}
+
+Normal form test for $R$ by finding if $order\_number$ is superkey.
+\begin{align*}
+    & (order\_number)^+\\
+    & result = order\_number\\
+    & order\_number \rightarrow address : result = order\_number, address\\
+    & order\_number \rightarrow fname, lname : result = order\_number, address,\\
+    & fname, lname\\
+    & (order\_number)^+ = order\_number, address, fname, lname\\
+    & (order\_number)^+ = R
+\end{align*}
+
+Since $order\_number$ superkey of $R$ and no functional dependency is in violation
+of BCNF, then shipping info is in normal form.
 
 \chapter{Database Schema Diagram}
 Here you can find the final schema diagram of the database.

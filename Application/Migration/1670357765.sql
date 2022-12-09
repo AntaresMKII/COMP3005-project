@@ -1,0 +1,30 @@
+DROP TABLE billing_infos;
+DROP TABLE is_genre;
+DROP TABLE ordered;
+DROP TABLE shipping_infos;
+DROP TABLE tracking_infos;
+DROP TABLE checkout_baskets;
+DROP TABLE orders;
+
+DROP TABLE users;
+DROP TABLE wrote;
+DROP TABLE authors;
+DROP TABLE books;
+DROP TABLE genres;
+DROP TABLE publishers;
+
+ALTER TABLE in_basket DROP CONSTRAINT in_basket_isbn_key;
+ALTER TABLE billing_infos DROP CONSTRAINT billing_infos_order_number_fkey;
+ALTER TABLE books DROP CONSTRAINT books_p_email_fkey;
+ALTER TABLE checkout_baskets DROP CONSTRAINT checkout_baskets_email_fkey;
+ALTER TABLE in_basket DROP CONSTRAINT in_basket_email_fkey;
+ALTER TABLE in_basket DROP CONSTRAINT in_basket_isbn_fkey;
+ALTER TABLE is_genre DROP CONSTRAINT is_genre_genre_name_fkey;
+ALTER TABLE is_genre DROP CONSTRAINT is_genre_isbn_fkey;
+ALTER TABLE ordered DROP CONSTRAINT ordered_isbn_fkey;
+ALTER TABLE ordered DROP CONSTRAINT ordered_order_number_fkey;
+ALTER TABLE orders DROP CONSTRAINT orders_email_fkey;
+ALTER TABLE shipping_infos DROP CONSTRAINT shipping_infos_order_number_fkey;
+ALTER TABLE tracking_infos DROP CONSTRAINT tracking_infos_order_number_fkey;
+ALTER TABLE wrote DROP CONSTRAINT wrote_aid_fkey;
+ALTER TABLE wrote DROP CONSTRAINT wrote_isbn_fkey;

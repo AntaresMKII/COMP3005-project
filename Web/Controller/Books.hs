@@ -21,7 +21,7 @@ instance Controller BooksController where
 
     action ShowBookAction { bookId } = do
         --book <- fetch bookId
-        (book:_) <- sqlQuery "SELECT * FROM books WHERE id = ?" (Only bookId)
+        (book:_) <- fetchBookWithInfo (Only bookId)
         render ShowView { .. }
 
     action EditBookAction { bookId } = do

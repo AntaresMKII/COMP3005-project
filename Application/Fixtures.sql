@@ -178,8 +178,15 @@ VALUES (
     '1983-03-01',
     23,
     12,
-    '91cae89d-6ebb-4fbe-8a44-cff4b74c7feb'
+    'bb148396-9c49-4aa5-a2d1-dd2b3ff02fb5'
 );
+
+UPDATE public.books
+SET publisher_id = (
+    SELECT id FROM public.publishers
+    WHERE public.publishers.email = 'info@ballantine.com'
+)
+WHERE public.books.isbn = '0345336275';
 
 ALTER TABLE public.publishers DISABLE TRIGGER ALL;
 
@@ -191,3 +198,12 @@ SELECT public.books.id, public.authors.id FROM public.books, public.authors
 WHERE public.books.isbn = '0345336275' AND public.authors.lname = 'Asimov';
 
 ALTER TABLE public.wrote ENABLE TRIGGER ALL;
+
+-- is genre
+ALTER TABLE public.is_genre DISABLE TRIGGER ALL;
+
+INSERT INTO public.is_genre (book_id, genre_id)
+SELECT public.books.id, public.genres.id FROM public.books, public.genres
+WHERE public.books.isbn = '0345336275' AND public.genres.name = 'Sci-fi';
+
+ALTER TABLE public.is_genre ENABLE TRIGGER ALL;

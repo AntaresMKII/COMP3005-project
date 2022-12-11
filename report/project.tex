@@ -419,15 +419,30 @@ Here you can find the final schema diagram of the database.
 \end{figure}
 
 \chapter{Implementation}
-Here is the link to the project repository:
+\section{Architecture}
+The implementation of the book store is a web based application developed using
+Integrated Haskell Platform (IHP) and the Haskell programming language. The
+application follows the MVC (Model-View-Controller) structure. It has an application
+called Web which deals with the front end of the website. Here requests will be
+processed by the Controllers which will respond to the request with a View.
 
+Most of the routing work is handled by the Book controller located in the Web/Controller/Books.hs
+file. Here different requests are routed requesting different informations from
+the database. This file is supposed to deal with simple queries as well but
+more complex queries and queries which require a JOIN operation are located
+in the Application/BooksQuery.hs file. This is due to how IHP and Haskell work
+with types, writing complex queries which will return new tables not defined
+in the schema will require a new custom data type. You can find these datatypes
+in the same file.
+
+\section{GitHub Repository}
 \url{https://github.com/AntaresMKII/COMP3005-project}
 
 \chapter{Appendix}
 Availability:
 \begin{itemize}
-    \item 10am - 10:20am
-    \item 10am - 10:40am
-    \item 1pm - 1:20pm
+    \item 10am
+    \item 11am
+    \item 1pm
 \end{itemize}
 \end{document}

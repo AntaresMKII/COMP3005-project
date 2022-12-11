@@ -1,0 +1,1 @@
+ALTER TABLE in_basket DROP CONSTRAINT in_basket_checkout_basket_id_key;

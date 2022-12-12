@@ -4,6 +4,7 @@
 \usepackage{rotating}
 \usepackage{amsmath}
 \usepackage{hyperref}
+\usepackage{xcolor}
 
 \graphicspath{ {img/} }
 
@@ -426,17 +427,20 @@ application follows the MVC (Model-View-Controller) structure. It has an applica
 called Web which deals with the front end of the website. Here requests will be
 processed by the Controllers which will respond to the request with a View.
 
-Most of the routing work is handled by the Book controller located in the Web/Controller/Books.hs
-file. Here different requests are routed requesting different informations from
-the database. This file is supposed to deal with simple queries as well but
+Most of the routing work is handled by the Book controller located in the
+Web/ Controller/Books.hs file. Here different requests are routed requesting
+different informations from the database.
+This file is supposed to deal with simple queries as well but
 more complex queries and queries which require a JOIN operation are located
 in the Application/BooksQuery.hs file. This is due to how IHP and Haskell work
 with types, writing complex queries which will return new tables not defined
-in the schema will require a new custom data type. You can find these datatypes
+in the schema will require a new custom data type. You can find these data types
 in the same file.
 
 \section{GitHub Repository}
+\textcolor{cyan}{
 \url{https://github.com/AntaresMKII/COMP3005-project}
+}
 
 \chapter{Appendix}
 Availability:

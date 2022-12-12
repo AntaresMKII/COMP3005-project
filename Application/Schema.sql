@@ -10,7 +10,7 @@ CREATE TABLE authors (
     nationality TEXT NOT NULL,
     fname TEXT NOT NULL,
     lname TEXT NOT NULL,
-    dob DATE NOT NULL
+    dob DATE
 );
 CREATE TABLE publishers (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL UNIQUE,

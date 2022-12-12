@@ -5,6 +5,7 @@ import Application.BooksQuery
 
 data ShowView = ShowView { book :: BookWithInfo }
 
+-- this instance of view is used to show one book information
 instance View ShowView where
     html ShowView { .. } = [hsx|
         {breadcrumb}

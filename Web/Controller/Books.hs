@@ -8,17 +8,14 @@ import Web.View.Books.Show
 
 import Application.BooksQuery
 
+-- here the actions are located for the book 
 instance Controller BooksController where
     action BooksAction = do
-        --books <- query @Book |> fetch
-        --books <- sqlQuery   "SELECT * FROM books, wrote, authors WHERE books.id = wrote.book_id AND authors.id = wrote.author_id" ()
+        -- the following line calls the function located in Application/BooksQuery.hs file
         booksWithAuthorName <- fetchBookWithAuthorName
         render IndexView { .. }
 
     action ShowBookAction { bookId } = do
-        --book <- fetch bookId
+        -- the following line calls the function located in Application/BooksQuery.hs file
         (book:_) <- fetchBookWithInfo (Only bookId)
         render ShowView { .. }
-
-buildBook book = book
-    |> fill @["isbn", "nPages", "summary", "price", "title", "releaseDate", "inStock", "publisherPercentage", "publisherId"]

@@ -4,7 +4,7 @@ import Web.View.Prelude
 import Application.BooksQuery
 
 data IndexView = IndexView { booksWithAuthorName :: [BookWithAuthorName]  }
-
+-- this instance of View shows the list of books present in the application
 instance View IndexView where
     html IndexView { .. } = [hsx|
         {breadcrumb}
@@ -31,6 +31,7 @@ instance View IndexView where
                 , breadcrumbLink "Books" BooksAction
                 ]
 
+-- this function renders one book
 renderBook :: BookWithAuthorName -> Html
 renderBook book = [hsx|
     <tr>

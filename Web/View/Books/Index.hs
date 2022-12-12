@@ -27,7 +27,8 @@ instance View IndexView where
     |]
         where
             breadcrumb = renderBreadcrumb
-                [ breadcrumbLink "Books" BooksAction
+                [ breadcrumbLink "Home" WelcomeAction
+                , breadcrumbLink "Books" BooksAction
                 ]
 
 renderBook :: BookWithAuthorName -> Html

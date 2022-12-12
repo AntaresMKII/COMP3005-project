@@ -5,11 +5,6 @@ import Web.Types
 
 -- Generator Marker
 instance AutoRoute StaticController
-instance AutoRoute GenresController
 
 
 instance AutoRoute BooksController
-
-
-instance AutoRoute AuthorsController
-
